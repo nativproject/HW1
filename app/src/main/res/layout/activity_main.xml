@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_landscape_gum_tree_free_vector"
+    tools:context=".MainActivity">
+
+    <TableLayout
+        android:layout_width="350dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true">
+
+        <TableRow
+            android:layout_width="350dp"
+            android:layout_height="150dp">
+
+            <ImageView
+                android:id="@+id/main_SVG_card_left"
+                android:layout_width="175dp"
+                android:layout_height="140dp"
+                android:layout_column="0"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp" />
+
+            <ImageView
+                android:id="@+id/main_SVG_card_right"
+                android:layout_width="175dp"
+                android:layout_height="140dp"
+                android:layout_column="1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp" />
+        </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/main_LBL_score_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="30dp"
+        android:background="#FFE1A5"
+        android:fontFamily="@font/g_light"
+        android:text="0"
+        android:textColor="#7C1E17"
+        android:textSize="45sp" />
+
+    <TextView
+        android:id="@+id/main_LBL_score_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="40dp"
+        android:background="#FBEEC0"
+        android:fontFamily="@font/g_light"
+        android:text="0"
+        android:textColor="#7C1E17"
+        android:textSize="45sp" />
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/logo" />
+
+    <ImageView
+        android:id="@+id/main_SVG_player_left"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="80dp"
+        android:src="@drawable/_016_cyclops" />
+
+    <ImageView
+        android:id="@+id/main_SVG_player_right"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="80dp"
+        android:src="@drawable/_019_monster" />
+
+    <Button
+        android:id="@+id/main_BTN_hit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#9C2A21"
+        android:fontFamily="@font/g_light"
+        android:text="HIT ME!"
+        android:textSize="23sp" />
+
+
+</RelativeLayout>
