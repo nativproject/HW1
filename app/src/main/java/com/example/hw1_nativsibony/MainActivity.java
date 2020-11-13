@@ -3,7 +3,7 @@ package com.example.hw1_nativsibony;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.drawable.Drawable;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,67 +11,95 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    Random rand = new Random();
+public class MainActivity extends AppCompatActivity {
+    private Random rand = new Random();
+    private Field[] drawables = R.drawable.class.getDeclaredFields();
+    private ArrayList<String> monsterList = new ArrayList<>();
     private Button main_BTN_hit;
-    private TextView main_LBL_score_left, main_LBL_score_right;
-    private ImageView main_SVG_card_left, main_SVG_card_right;
-    private int score_right = 0, score_left = 0;
-    private final String card_type = "cdhs"; //clubs diamonds hearts spades
-    private final String card_num = "jqka23456789"; //jack queen king ace ...
+    private TextView main_LBL_score_left, main_LBL_score_right, main_LBL_player_left, main_LBL_player_right;
+    private ImageView main_SVG_card_left, main_SVG_card_right, main_SVG_player_left, main_SVG_player_right;
+    private int score_right = 100, score_left = 100, image_id;
+    // cdhs = clubs diamonds hearts spades  jqka = jack queen king ace
+    private final String card_type = "cdhs", card_num = "jqka23456789";
     private final String IMG_ID_RIGHT = "IMG_ID_RIGHT", IMG_ID_LEFT = "IMG_ID_LEFT";
+    private String player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initPlayersList();
         findViews();
         initViews();
-
+        onClickEvent(main_BTN_hit);
         // TODO: 11/11/2020 fix destroyed game after return button is pressed
-        if (savedInstanceState != null) {
-            int curr_right_img = savedInstanceState.getInt(IMG_ID_RIGHT);
-            int curr_left_img = savedInstanceState.getInt(IMG_ID_LEFT);
-            main_SVG_card_left.setImageResource(curr_left_img);
-            main_SVG_card_left.setImageResource(curr_right_img);
-        }
     }
 
     private void initViews() {
         main_LBL_score_left.setText("" + score_left);
         main_LBL_score_right.setText("" + score_right);
-        main_BTN_hit.setOnClickListener(this);
+
+        randomPlayer(main_SVG_player_left, main_LBL_player_left);
+        randomPlayer(main_SVG_player_right, main_LBL_player_right);
+
+    }
+
+    private void initPlayersList() {
+        int i = 1;
+        for (Field drawable : drawables) {
+            if (drawable.getName().startsWith("m" + i) && i < 27) {
+                monsterList.add(drawable.getName());
+                i++;
+            }
+        }
     }
 
     private void findViews() {
+        main_SVG_player_left = findViewById(R.id.main_SVG_player_left);
+        main_SVG_player_right = findViewById(R.id.main_SVG_player_right);
         main_SVG_card_left = findViewById(R.id.main_SVG_card_left);
         main_SVG_card_right = findViewById(R.id.main_SVG_card_right);
         main_LBL_score_left = findViewById(R.id.main_LBL_score_left);
         main_LBL_score_right = findViewById(R.id.main_LBL_score_right);
+        main_LBL_player_left = findViewById(R.id.main_LBL_player_left);
+        main_LBL_player_right = findViewById(R.id.main_LBL_player_right);
         main_BTN_hit = (Button) findViewById(R.id.main_BTN_hit);
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.main_BTN_hit) {
-            play();
+    public void onClickEvent(Button btn) {
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openWinnerActivity();
+            }
+        });
+    }
+
+    private boolean isPlayable() {
+        int strike_from_left = fixCardValues(nextCard(main_SVG_card_left)),
+                strike_from_right = fixCardValues(nextCard(main_SVG_card_right));
+        score_left -= strike_from_right;
+        score_right -= strike_from_left;
+
+        // show winner
+        if (score_left <= 0 && score_right <= 0) {
+            return true;
+        } else if (score_right <= 0) {
+            return true;
+        } else if (score_left <= 0) {
+            return true;
+        } else {
+            main_LBL_score_left.setText("" + score_left);
+            main_LBL_score_right.setText("" + score_right);
+            return false;
         }
     }
 
-    private void play() {
-        if (score_right != 22 && score_left != 22) {
-            int res1 = fixCardValue(nextImage(main_SVG_card_left));
-            int res2 = fixCardValue(nextImage(main_SVG_card_right));
-            if (res1 > res2)
-                main_LBL_score_left.setText("" + (++score_left));
-            else if (res1 < res2)
-                main_LBL_score_right.setText("" + (++score_right));
-        }
-    }
-
-    private int fixCardValue(int num) {
+    private int fixCardValues(int num) {
         if (num == 49)          // Ace
             return num - 35;
         else if (num == 59)     // King
@@ -84,24 +112,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return num;
     }
 
-    private int nextImage(ImageView img) {
+    private int nextCard(ImageView img) {
         char type_res = card_type.charAt(rand.nextInt(card_type.length()));
         char num_res = card_num.charAt(rand.nextInt(card_num.length()));
         String card = "ornamental_" + type_res + "_" + num_res;
-        int id = img.getResources().getIdentifier(card, "drawable", getPackageName());
-        //Log.d("iddd", "id: " + card);
-        img.setImageResource(id);
+        image_id = img.getResources().getIdentifier(card, "drawable", getPackageName());
+        img.setImageResource(image_id);
         int res = num_res - '0';
         return res;
+    }
+
+    private void randomPlayer(ImageView img, TextView tv) {
+        player = monsterList.get(rand.nextInt(monsterList.size()));
+        image_id = img.getResources().getIdentifier(player, "drawable", getPackageName());
+        img.setImageResource(image_id);
+        String[] name = player.split("_");
+        tv.setText(name[1]);
+    }
+
+    public void openWinnerActivity() {
+        Intent intent = new Intent(this, WinnerActivity.class);
+        startActivity(intent);
     }
 
     // TODO: 11/11/2020 this not working correctly
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(IMG_ID_LEFT, main_SVG_card_left.getId());
-        outState.putInt(IMG_ID_RIGHT, main_SVG_card_right.getId());
-        Log.d("iddd", "id: " + main_SVG_card_left.getId());
     }
 
     @Override

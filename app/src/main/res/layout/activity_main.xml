@@ -78,8 +78,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="15dp"
-        android:layout_marginBottom="80dp"
-        android:src="@drawable/_016_cyclops" />
+        android:layout_marginBottom="80dp" />
 
     <ImageView
         android:id="@+id/main_SVG_player_right"
@@ -88,8 +87,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="15dp"
-        android:layout_marginBottom="80dp"
-        android:src="@drawable/_019_monster" />
+        android:layout_marginBottom="80dp" />
 
     <Button
         android:id="@+id/main_BTN_hit"
@@ -98,10 +96,34 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        android:backgroundTint="#9C2A21"
+        android:backgroundTint="#75322D"
         android:fontFamily="@font/g_light"
         android:text="HIT ME!"
         android:textSize="23sp" />
+
+    <TextView
+        android:id="@+id/main_LBL_player_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/paintdropsregular"
+        android:textColor="#FFEB3B"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/main_LBL_player_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/paintdropsregular"
+        android:textColor="#0048FF"
+        android:textSize="40sp" />
 
 
 </RelativeLayout>
