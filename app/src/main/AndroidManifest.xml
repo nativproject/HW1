@@ -9,13 +9,14 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.HW1_NativSibony">
-        <activity android:name=".WinnerActivity"></activity>
+        <activity
+            android:name=".WinnerActivity"
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
