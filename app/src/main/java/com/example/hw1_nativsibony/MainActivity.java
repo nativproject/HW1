@@ -133,12 +133,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        this.finish();
     }
 
     public void openWinnerActivity(String winner) {
         Intent intent = new Intent(this, WinnerActivity.class);
         intent.putExtra("winner", winner);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        finish();
         startActivity(intent);
     }
 

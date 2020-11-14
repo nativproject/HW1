@@ -40,16 +40,24 @@ public class WinnerActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        this.finish();
+    }
+
+    @Override
+    protected void onResume() {
+        Log.d("ddd", "onResume()2");
+        super.onResume();
+    }
+
+    @Override
+    protected void onStart() {
+        Log.d("ddd", "onStart()2");
+        super.onStart();
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.winner_BTN_new_game:
-                openMainActivity();
-                break;
-        }
+        if (v.getId() == R.id.winner_BTN_new_game)
+            openMainActivity();
     }
 
     public void openMainActivity() {
