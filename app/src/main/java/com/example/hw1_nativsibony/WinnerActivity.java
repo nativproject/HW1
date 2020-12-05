@@ -44,13 +44,11 @@ public class WinnerActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     protected void onResume() {
-        Log.d("ddd", "onResume()2");
         super.onResume();
     }
 
     @Override
     protected void onStart() {
-        Log.d("ddd", "onStart()2");
         super.onStart();
     }
 

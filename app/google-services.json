@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "74367061019",
+    "project_id": "hw1-nativsibony",
+    "storage_bucket": "hw1-nativsibony.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74367061019:android:2cad3d219fee3f8349fcbe",
+        "android_client_info": {
+          "package_name": "com.example.hw1_nativsibony"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "74367061019-66nqp2e819rf7fbr66sfprpv81psn3ed.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDycXWA7Jyq1x6b5lkhmCSjleIw6k8tACw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "74367061019-66nqp2e819rf7fbr66sfprpv81psn3ed.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/records"
+    android:orientation="horizontal"
+    tools:context=".BoardActivity">
+
+
+    <GridLayout
+        android:layout_width="460dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:columnCount="4">
+
+        <TextView
+            android:id="@+id/record_1"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:fontFamily="@font/g_light"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/record_2"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:fontFamily="@font/g_light"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/record_3"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:fontFamily="@font/g_light"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/record_4"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:fontFamily="@font/g_light"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/record_5"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:fontFamily="@font/g_light"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/record_6"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:fontFamily="@font/g_light"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/record_7"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:fontFamily="@font/g_light"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/record_8"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:fontFamily="@font/g_light"
+            android:gravity="center"/>
+
+    </GridLayout>
+
+</RelativeLayout>

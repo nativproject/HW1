@@ -10,16 +10,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HW1_NativSibony">
         <activity
-            android:name=".WinnerActivity"
-            android:screenOrientation="landscape"></activity>
+            android:name=".BoardActivity"
+            android:screenOrientation="sensorLandscape"></activity>
         <activity
-            android:name=".MainActivity"
-            android:screenOrientation="landscape">
+            android:name=".EntryActivity"
+            android:screenOrientation="sensorLandscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".WinnerActivity"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="sensorLandscape"></activity>
     </application>
 
 </manifest>

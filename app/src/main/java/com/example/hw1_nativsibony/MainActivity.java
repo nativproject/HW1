@@ -20,13 +20,12 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Random rand = new Random();
     private final Field[] fields = R.drawable.class.getDeclaredFields();
-    ;
     private ArrayList<String> monsterList = new ArrayList<>();
     private Button main_BTN_hit;
     private TextView main_LBL_score_left, main_LBL_score_right, main_LBL_player_left, main_LBL_player_right;
     private ImageView main_SVG_card_left, main_SVG_card_right, main_SVG_player_left, main_SVG_player_right;
     private int score_right = 0, score_left = 0, image_id;
-    // cdhs = clubs diamonds hearts spades  jqka = jack queen king ace
+    // cdhs: clubs diamonds hearts spades,  jqka: jack queen king ace
     private final String card_type = "cdhs", card_num = "jqka23456789", Draw = "It's A Draw!", keep_play = "f";
     private String player, card;
     private boolean flag = false;
@@ -141,12 +140,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finish();
         startActivity(intent);
-    }
-
-    // TODO: 11/11/2020 this not working correctly
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
     }
 
     @Override
