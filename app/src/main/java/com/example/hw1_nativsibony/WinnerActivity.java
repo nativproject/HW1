@@ -40,6 +40,7 @@ public class WinnerActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        finish();
     }
 
     @Override
@@ -59,7 +60,8 @@ public class WinnerActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     public void openMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
+        this.finish();
+        Intent intent = new Intent(this, EntryActivity.class);
         startActivity(intent);
     }
 }

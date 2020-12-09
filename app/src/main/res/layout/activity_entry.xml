@@ -17,14 +17,25 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:backgroundTint="#B15F59"
-            android:text="Start"
+            android:text="Normal"
             android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/entry_BTN_auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/entry_BTN_start"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#C58528"
+            android:text="Auto Play"
+            android:textSize="20sp"/>
 
         <Button
             android:id="@+id/entry_BTN_records"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/entry_BTN_start"
+            android:layout_below="@+id/entry_BTN_auto"
             android:layout_centerInParent="true"
             android:layout_marginTop="20dp"
             android:backgroundTint="#5E69A8"

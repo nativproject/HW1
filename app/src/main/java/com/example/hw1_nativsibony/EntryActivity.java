@@ -31,7 +31,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 
 public class EntryActivity extends AppCompatActivity {
-    private Button entry_BTN_start, entry_BTN_records;
+    private Button entry_BTN_start, entry_BTN_records, entry_BTN_auto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,21 +42,32 @@ public class EntryActivity extends AppCompatActivity {
         entry_BTN_start.setOnClickListener(view -> startGame());
 
         entry_BTN_records.setOnClickListener(view -> showRecords());
+
+        entry_BTN_auto.setOnClickListener(view -> autoPlay());
     }
 
     private void findViews() {
         entry_BTN_start = (Button) findViewById(R.id.entry_BTN_start);
         entry_BTN_records = (Button) findViewById(R.id.entry_BTN_records);
+        entry_BTN_auto = (Button) findViewById(R.id.entry_BTN_auto);
     }
 
     public void startGame() {
         this.finish();
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("MODE", "0");
         startActivity(intent);
     }
 
     public void showRecords() {
         Intent intent = new Intent(this, BoardActivity.class);
+        startActivity(intent);
+    }
+
+    public void autoPlay() {
+        this.finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("MODE", "1");
         startActivity(intent);
     }
 }

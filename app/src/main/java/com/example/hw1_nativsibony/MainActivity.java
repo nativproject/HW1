@@ -4,40 +4,97 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Random rand = new Random();
+    private final Handler mHanbler = new Handler();
     private final Field[] fields = R.drawable.class.getDeclaredFields();
     private ArrayList<String> monsterList = new ArrayList<>();
     private Button main_BTN_hit;
+    private DatabaseReference dbRef;
     private TextView main_LBL_score_left, main_LBL_score_right, main_LBL_player_left, main_LBL_player_right;
     private ImageView main_SVG_card_left, main_SVG_card_right, main_SVG_player_left, main_SVG_player_right;
+    private ProgressBar health_right, health_left;
     private int score_right = 0, score_left = 0, image_id;
     // cdhs: clubs diamonds hearts spades,  jqka: jack queen king ace
-    private final String card_type = "cdhs", card_num = "jqka23456789", Draw = "It's A Draw!", keep_play = "f";
+    private final String card_type = "cdhs", card_num = "jqka23456789", Draw = "It's A Draw!", keep_play = "ok", MODE = "MODE";
     private String player, card;
     private boolean flag = false;
+    private View v;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initPlayersList();
         findViews();
         initViews();
+
+        if (getIntent().getExtras().getString(MODE).equals("1")) {
+            main_BTN_hit.setVisibility(View.GONE);
+            startRunning(v);
+        }
+
+    }
+
+    private void startRunning(View v) {
+        mToastRunnable.run();
+    }
+
+    private Runnable mToastRunnable = new Runnable() {
+        @Override
+        public void run() {
+            autoPlay();
+            mHanbler.postDelayed(this, 500);
+        }
+    };
+
+    private void autoPlay() {
+        String status = isPlayable();
+        String left = main_LBL_player_left.getText().toString(),
+                right = main_LBL_player_right.getText().toString();
+        if (!flag) {
+            if (!status.equals(keep_play)) {
+                if (status.equals(Draw)) {
+                    openWinnerActivity(Draw);
+                    flag = true;
+                } else if (status.equals(left)) {
+                    updateData(left);
+                    openWinnerActivity(left);
+                    flag = true;
+                } else {
+                    updateData(right);
+                    openWinnerActivity(right);
+                    flag = true;
+                }
+            }
+        }
     }
 
     private void initViews() {
@@ -48,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         randomPlayer(main_SVG_player_right, main_LBL_player_right);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void findViews() {
         main_SVG_player_left = findViewById(R.id.main_SVG_player_left);
         main_SVG_player_right = findViewById(R.id.main_SVG_player_right);
@@ -58,13 +116,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         main_LBL_player_left = findViewById(R.id.main_LBL_player_left);
         main_LBL_player_right = findViewById(R.id.main_LBL_player_right);
         main_BTN_hit = (Button) findViewById(R.id.main_BTN_hit);
+        health_right = (ProgressBar) findViewById(R.id.health_right);
+        health_left = (ProgressBar) findViewById(R.id.health_left);
+        health_right.setProgressTintList(ColorStateList.valueOf(Color.RED));
+        health_left.setProgressTintList(ColorStateList.valueOf(Color.RED));
+
     }
 
     private String isPlayable() {
         int strike_from_left = fixCardValues(nextCard(main_SVG_card_left)),
                 strike_from_right = fixCardValues(nextCard(main_SVG_card_right));
         score_left += strike_from_right;
+        health_right.setProgress(100 - score_right);
         score_right += strike_from_left;
+        health_left.setProgress(100 - score_left);
+
 
 //        Log.d("ddd", "left: " + score_left);
 //        Log.d("ddd", "right: " + score_right);
@@ -111,14 +177,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initPlayersList() {
-        int i = 1;
-        for (Field field : fields)
-            if (field.getName().startsWith("m" + i))
+        for (Field field : fields) {
+            if (field.getName().startsWith("m1")) {
                 monsterList.add(field.getName());
-
-//        for (String id : monsterList)
-//            Log.d("ddd", "" + id);
-
+            }
+        }
     }
 
     private void randomPlayer(ImageView img, TextView tv) {
@@ -129,17 +192,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv.setText(name[1]);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
-
     public void openWinnerActivity(String winner) {
+        this.finish();
         Intent intent = new Intent(this, WinnerActivity.class);
         intent.putExtra("winner", winner);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        finish();
         startActivity(intent);
+    }
+
+    private void updateData(String label) {
+        dbRef = FirebaseDatabase.getInstance().getReference().child("HighScore");
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String name = ds.child("name").getValue().toString();
+                    Integer score = ds.child("score").getValue(Integer.class);
+                    if (label.equals(name)) {
+                        ds.child("score").getRef().setValue(score + 1);
+                        Log.d("ppp", "correct name: " + label + " not correct: " + name);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -153,15 +234,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         openWinnerActivity(Draw);
                         flag = true;
                     } else if (isPlayable().equals(left)) {
+                        updateData(left);
                         openWinnerActivity(left);
                         flag = true;
                     } else {
+                        updateData(right);
                         openWinnerActivity(right);
                         flag = true;
                     }
                 }
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     @Override

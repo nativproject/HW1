@@ -24,7 +24,7 @@ public class BoardActivity extends AppCompatActivity {
     int[] textViews = {R.id.record_1, R.id.record_2, R.id.record_3, R.id.record_4, R.id.record_5, R.id.record_6, R.id.record_7, R.id.record_8};
     private DatabaseReference dbRef;
     private HashMap<String, Integer> scoreList = new HashMap<String, Integer>();
-    private String[] name;
+    private String name;
     private Integer score;
 
     @Override
@@ -34,15 +34,13 @@ public class BoardActivity extends AppCompatActivity {
 
         dbRef = FirebaseDatabase.getInstance().getReference().child("HighScore");
         dbRef.addValueEventListener(new ValueEventListener() {
-            int i = 1;
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    name = child.child("name").getValue().toString().split("_");
-                    score = Integer.parseInt(child.child("score").getValue().toString());
-                    scoreList.put(name[1].toUpperCase(), score);
-                    i++;
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    name = ds.child("name").getValue().toString();
+                    score = Integer.parseInt(ds.child("score").getValue().toString());
+                    scoreList.put(name.toUpperCase(), score);
                 }
                 List<Map.Entry<String, Integer>> greatest = findGreatest(scoreList, 8);
                 for (int i = 0; i < greatest.size(); i++) {
