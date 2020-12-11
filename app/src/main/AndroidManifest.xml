@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hw1_nativsibony">
 
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
@@ -9,9 +11,10 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.HW1_NativSibony">
+
         <activity
             android:name=".BoardActivity"
-            android:screenOrientation="sensorLandscape"></activity>
+            android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".EntryActivity"
             android:screenOrientation="sensorLandscape">
@@ -26,7 +29,7 @@
             android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="sensorLandscape"></activity>
+            android:screenOrientation="sensorLandscape" />
     </application>
 
 </manifest>

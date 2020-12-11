@@ -27,8 +27,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Random rand = new Random();
@@ -43,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int score_right = 0, score_left = 0, image_id;
     // cdhs: clubs diamonds hearts spades,  jqka: jack queen king ace
     private final String card_type = "cdhs", card_num = "jqka23456789", Draw = "It's A Draw!", keep_play = "ok", MODE = "MODE";
-    private String player, card;
+    private String player, card, gameType;
     private boolean flag = false;
     private View v;
 
@@ -55,12 +53,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initPlayersList();
         findViews();
         initViews();
-
-        if (getIntent().getExtras().getString(MODE).equals("1")) {
+        gameType = getIntent().getExtras().getString(MODE);
+        if (gameType.equals("1")) {
             main_BTN_hit.setVisibility(View.GONE);
             startRunning(v);
         }
-
     }
 
     private void startRunning(View v) {
@@ -131,10 +128,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         score_right += strike_from_left;
         health_left.setProgress(100 - score_left);
 
-
-//        Log.d("ddd", "left: " + score_left);
-//        Log.d("ddd", "right: " + score_right);
-
         if (score_left >= 100 && score_right >= 100) {
             main_LBL_score_left.setText("" + 100);
             main_LBL_score_right.setText("" + 100);
@@ -193,10 +186,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void openWinnerActivity(String winner) {
-        this.finish();
-        Intent intent = new Intent(this, WinnerActivity.class);
-        intent.putExtra("winner", winner);
+        Intent intent = new Intent(getApplicationContext(), WinnerActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        this.finish();
+        intent.putExtra("winner", winner);
         startActivity(intent);
     }
 
@@ -211,7 +205,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Integer score = ds.child("score").getValue(Integer.class);
                     if (label.equals(name)) {
                         ds.child("score").getRef().setValue(score + 1);
-                        Log.d("ppp", "correct name: " + label + " not correct: " + name);
                     }
                 }
             }
@@ -249,7 +242,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if (gameType.equals("0")) {
+            super.onBackPressed();
+            this.finish();
+        }
     }
 
     @Override
@@ -270,6 +266,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        this.finish();
+
     }
 
     @Override
