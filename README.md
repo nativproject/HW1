@@ -4,7 +4,7 @@
  
 Game Activities:
 
-[![MinIO](https://raw.githubusercontent.com/minio/minio/master/.github/logo.svg?sanitize=true)
+![MinIO](https://raw.githubusercontent.com/minio/minio/master/.github/logo.svg?sanitize=true)
 
 
 1. Entry
