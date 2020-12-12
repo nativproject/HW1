@@ -5,10 +5,6 @@
 Game Activities:
 
 ![MinIO](https://ibb.co/KNsGhFD)
-https://ibb.co/KNsGhFD
-https://ibb.co/Njg4PrS
-https://ibb.co/nshkPvw
-https://ibb.co/GM6Fh61
 
 1. Entry
 [!Entry](https://ibb.co/k4KNDdq)
