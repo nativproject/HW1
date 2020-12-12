@@ -5,7 +5,7 @@
 Game Activities:
 
 1. Entry
-![alt text](https://imgur.com/OhEwik6)
+![alt text](https://ibb.co/k4KNDdq)
 
 2. GamePlay
 ![alt text](https://imgur.com/KrhsSMJ)
@@ -21,6 +21,6 @@ Features:
 
 * Normal gameplay 
   * by clicking on "Hit Me" button
-* Added autoplay!
+* Added Autoplay!
 
 Copyright © 2020 Nativ Sibony
