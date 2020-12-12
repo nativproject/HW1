@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.HW1_NativSibony">
-
+        <activity android:name=".AudioPlay"></activity>
         <activity
             android:name=".BoardActivity"
             android:screenOrientation="sensorLandscape" />

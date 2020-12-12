@@ -18,17 +18,14 @@ import java.util.List;
 public class EntryActivity extends AppCompatActivity {
     private Button entry_BTN_start, entry_BTN_records, entry_BTN_auto;
     private final String MODE = "MODE";
-    private MediaPlayer mediaPlayer = new MediaPlayer();
+    //private MediaPlayer mediaPlayer = new MediaPlayer();
     private int length;
+    boolean isPlay = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry);
-        mediaPlayer = MediaPlayer.create(this, R.raw.bg_music);
-        mediaPlayer.start();
-
-        mediaPlayer.setVolume(25, 25);
         findViews();
         entry_BTN_start.setOnClickListener(view -> normalPlay());
 
@@ -70,7 +67,8 @@ public class EntryActivity extends AppCompatActivity {
     protected void onPause() {
         if (isApplicationSentToBackground(this)) {
             // Do what you want to do on detecting Home Key being Pressed
-            mediaPlayer.stop();
+            AudioPlay.stopAudio();
+            isPlay = false;
         }
         super.onPause();
     }
@@ -90,7 +88,8 @@ public class EntryActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        mediaPlayer.stop();
+        AudioPlay.stopAudio();
+        isPlay = false;
     }
 
     @Override
@@ -101,7 +100,10 @@ public class EntryActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mediaPlayer.start();
+        if(!isPlay) {
+            AudioPlay.playAudio(this, R.raw.bg_music);
+            isPlay = true;
+        }
     }
 }
 

@@ -2,6 +2,9 @@ package com.example.hw1_nativsibony;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,10 +13,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 public class WinnerActivity extends AppCompatActivity implements View.OnClickListener {
     Button winner_BTN_new_game;
     TextView winner_LBL, isWinner_LBL;
+    boolean isPlay = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,10 @@ public class WinnerActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onResume() {
         super.onResume();
+        if (!isPlay) {
+            AudioPlay.playAudio(this, R.raw.bg_music);
+            isPlay = true;
+        }
     }
 
     @Override
@@ -58,9 +67,40 @@ public class WinnerActivity extends AppCompatActivity implements View.OnClickLis
             openMainActivity();
     }
 
+
     public void openMainActivity() {
-        this.finish();
         Intent intent = new Intent(this, EntryActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
+        this.finish();
+    }
+
+    public boolean isApplicationSentToBackground(final Context context) {
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
+        if (!tasks.isEmpty()) {
+            ComponentName topActivity = tasks.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    protected void onPause() {
+        if (isApplicationSentToBackground(this)) {
+            // Do what you want to do on detecting Home Key being Pressed
+            AudioPlay.stopAudio();
+            isPlay = false;
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        this.finish();
     }
 }
