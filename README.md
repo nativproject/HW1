@@ -19,7 +19,8 @@ Game Activities:
 
 Features:
 
-* Normal game by clicking on "Hit Me" button
+* Normal gameplay 
+  * by clicking on "Hit Me" button
 * Added autoplay!
 
 Copyright [yyyy] [Nativ Sibony]
