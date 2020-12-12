@@ -4,7 +4,7 @@
  
 Game Activities:
 
-![MinIO](https://ibb.co/KNsGhFD)
+![Alt text](http://ibb.co/KNsGhFD)
 
 1. Entry
 [!Entry](https://ibb.co/k4KNDdq)
