@@ -7,16 +7,16 @@ Game Activities:
 
 
 1. Entry
-![Entry](../master/images/entry.png)
+  - ![Entry](../master/images/entry.png)
 
 2. GamePlay
-![GamePlay](../master/images/play.png)
+  - ![GamePlay](../master/images/play.png)
 
 3. Winner
-![Winner](../master/images/winner.png)
+  - ![Winner](../master/images/winner.png)
 
 4. Score Board
-![Score](../master/images/score.png)
+  - ![Score](../master/images/records.png)
 
 
 Features:
