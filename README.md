@@ -4,8 +4,11 @@
  
 Game Activities:
 
-![MinIO](https://raw.githubusercontent.com/minio/minio/master/.github/logo.svg?sanitize=true)
-
+![MinIO](https://ibb.co/KNsGhFD)
+https://ibb.co/KNsGhFD
+https://ibb.co/Njg4PrS
+https://ibb.co/nshkPvw
+https://ibb.co/GM6Fh61
 
 1. Entry
 [!Entry](https://ibb.co/k4KNDdq)
