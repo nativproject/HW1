@@ -8,16 +8,16 @@ Game Activities:
 
 
 1. Entry
-![alt text](https://ibb.co/k4KNDdq)
+![Entry](https://ibb.co/k4KNDdq)
 
 2. GamePlay
-![alt text](https://imgur.com/KrhsSMJ)
+![GamePlay](https://imgur.com/KrhsSMJ)
 
 3. Winner
-![alt text](https://imgur.com/vj8h92N)
+![Winner](https://imgur.com/vj8h92N)
 
 4. Score Board
-![alt text](https://imgur.com/soqxowR)
+![Score](https://imgur.com/soqxowR)
 
 
 Features:
