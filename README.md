@@ -4,7 +4,8 @@
  
 Game Activities:
 
-![Alt text](https://ibb.co/KNsGhFD)
+![Optional Text](../master/images/entry.png)
+
 
 1. Entry
 [!Entry](https://ibb.co/k4KNDdq)
