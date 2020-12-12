@@ -23,4 +23,4 @@ Features:
   * by clicking on "Hit Me" button
 * Added autoplay!
 
-Copyright [2020] [Nativ Sibony]
+Copyright (C) [date] [copyright owner]
