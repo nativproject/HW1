@@ -4,20 +4,19 @@
  
 Game Activities:
 
-![Optional Text](../master/images/entry.png)
 
 
 1. Entry
-[!Entry](https://ibb.co/k4KNDdq)
+![Entry](../master/images/entry.png)
 
 2. GamePlay
-![GamePlay](https://imgur.com/KrhsSMJ)
+![GamePlay](../master/images/play.png)
 
 3. Winner
-![Winner](https://imgur.com/vj8h92N)
+![Winner](../master/images/winner.png)
 
 4. Score Board
-![Score](https://imgur.com/soqxowR)
+![Score](../master/images/score.png)
 
 
 Features:
